@@ -1,0 +1,27 @@
+<div class="form-group">
+  <h3>Add User</h3>
+ 
+  <label for="username">Add User: </label>
+  <input type="text" class="form-control" id="username" [(ngModel)]="username"/>
+  <div *ngIf="username.indexOf(' ') != -1"><small>Spaces are not allowed in username</small></div>
+  <div class="mt-2">
+    <div [ngSwitch]="userType">
+      <div *ngSwitchCase="1"><button class="btn btn-primary" (click)="onAddUserClick()">Add user</button></div>
+      <div *ngSwitchCase="2"><button class="btn btn-danger" (click)="onAddUserClick()">Add user</button></div>
+      <div *ngSwitchCase="3"><button class="btn btn-warning" (click)="onAddUserClick()">Add user</button></div>
+      <div *ngSwitchDefault><button class="btn btn-secondary" (click)="onAddUserClick()">Add user</button></div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="mt-3">
+  <h3>Users List</h3>
+  <p appHighlightText>Following are the users added: </p>
+  <ng-container  *ngFor="let user of userList" >
+    <app-user [username]='user' *ngIf="user.indexOf(' ') === -1">
+      <p>{{user}} of type user type {{routedUserType}} is added successfully</p>
+    </app-user>
+  </ng-container>
+  
+</div>
